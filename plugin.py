@@ -8,7 +8,7 @@ class ShelterPlugin(PythonPlugin):
         target_position = player_position.add(dir_unit_vector)      # Calculate the target position
 
         world = sender.getWorld()                                   # Get the world object
-        block = world.getBlockAt(target_position)               # Get the block at the target position
-        block.setType(bukkit.Material.getMaterial("GOLD_BLOCK"))               # Set the block type to gold
+        block = world.getBlockAt(target_position)                   # Get the block at the target position
+        block.setType(bukkit.Material.getMaterial("STONE_BLOCK"))    # Set the block type to gold
 
         return True
