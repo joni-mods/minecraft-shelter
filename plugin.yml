@@ -1,0 +1,7 @@
+name: Shelter-Plugin
+main: ShelterPlugin
+version: 1.0
+commands:
+  shelter:
+    description: Shelter-Plugin
+    usage: /shelter
