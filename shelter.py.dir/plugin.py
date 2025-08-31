@@ -1,6 +1,3 @@
-import Vector
-
-
 class ShelterPlugin(PythonPlugin):
     def onEnable(self):
         pass
