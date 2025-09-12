@@ -9,21 +9,22 @@ class ShelterPlugin(PythonPlugin):
         target_position = player_position.add(dir_unit_vector.multiply(10))
 
         # build outer walls
-        ShelterPlugin.buildCube(self, sender, target_position, 4, 6, 6, bukkit.Material.STONE)
+        ShelterPlugin.buildCube(sender, target_position, 4, 6, 6, bukkit.Material.STONE)
 
         # build door
         target_position.setX(target_position.getX() + 1)
         target_position.setY(target_position.getY() + 1)
-        ShelterPlugin.buildDoor(self, sender, target_position, bukkit.Material.DARK_OAK_DOOR,
+        ShelterPlugin.buildDoor(sender, target_position, bukkit.Material.DARK_OAK_DOOR,
                                 bukkit.Material.JUNGLE_DOOR)
 
         # build inner space
         target_position.setZ(target_position.getZ() + 1)
-        ShelterPlugin.buildCube(self, sender, target_position, 2, 4, 4, bukkit.Material.AIR)
+        ShelterPlugin.buildCube(sender, target_position, 2, 4, 4, bukkit.Material.AIR)
 
         return True
 
-    def buildCube(self, player, target_position, height, width, length, material):
+    @staticmethod
+    def buildCube(player, target_position, height, width, length, material):
         position = target_position.clone()
         world = player.getWorld()
 
@@ -42,7 +43,8 @@ class ShelterPlugin(PythonPlugin):
 
         return True
 
-    def buildDoor(self, player, target_position, material_lower, material_upper):
+    @staticmethod
+    def buildDoor(player, target_position, material_lower, material_upper):
         position = target_position.clone()
         world = player.getWorld()
 
