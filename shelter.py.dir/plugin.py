@@ -1,3 +1,10 @@
+from org.bukkit.entity import Player
+from org.bukkit.block import BlockFace
+from org.bukkit.block.data import BlockData
+from org.bukkit.block.data import Bisected
+from org.bukkit.block.data.type import Door
+
+
 class ShelterPlugin(PythonPlugin):
 
     def onEnable(self):
