@@ -3,6 +3,7 @@ from org.bukkit.block import BlockFace
 from org.bukkit.block.data import BlockData
 from org.bukkit.block.data import Bisected
 from org.bukkit.block.data.type import Door
+from org.bukkit.block.data.type import Bed
 
 
 class ShelterPlugin(PythonPlugin):
@@ -29,9 +30,14 @@ class ShelterPlugin(PythonPlugin):
         ShelterPlugin.buildCube(sender, target_position, 2, 4, 4, bukkit.Material.AIR)
 
         # build the torch
-        target_position.setZ(target_position.getZ() + 1)
+        target_position.setZ(target_position.getZ() + 3)
         target_position.setY(target_position.getY() + 1)
         ShelterPlugin.buildTorch(sender, target_position)
+
+        # build the bed
+        target_position.setX(target_position.getX() + 2)
+        target_position.setY(target_position.getY() - 1)
+        ShelterPlugin.buildBed(sender, target_position)
 
         return True
 
@@ -76,6 +82,27 @@ class ShelterPlugin(PythonPlugin):
         door_upper.setBlockData(door_upper_data)
 
         return True
+
+    @staticmethod
+    def buildBed(player, target_position):
+        position = target_position.clone()
+        world = player.getWorld()
+        
+        bed_footer_block = world.getBlockAt(position)
+        bed_footer_block.setType(bukkit.Material.RED_BED)
+        bed_footer_block_data = bed_footer_block.getBlockData()
+        bed_footer_block_data.setPart(Bed.Part.FOOT)
+        bed_footer_block_data.setFacing(BlockFace.EAST)
+        bed_footer_block.setBlockData(bed_footer_block_data)
+        
+        bed_header_block = bed_footer_block.getRelative(BlockFace.EAST)
+        bed_header_block.setType(bukkit.Material.RED_BED, False)
+        bed_header_block_data = bed_footer_block.getBlockData()
+        bed_header_block_data.setPart(Bed.Part.HEAD)
+        bed_header_block_data.setFacing(BlockFace.EAST)
+        bed_header_block.setBlockData(bed_header_block_data)
+        
+        return True        
 
     @staticmethod
     def buildTorch(player, target_position):
