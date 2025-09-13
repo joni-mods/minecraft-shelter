@@ -87,22 +87,22 @@ class ShelterPlugin(PythonPlugin):
     def buildBed(player, target_position):
         position = target_position.clone()
         world = player.getWorld()
-        
+
         bed_footer_block = world.getBlockAt(position)
         bed_footer_block.setType(bukkit.Material.RED_BED)
         bed_footer_block_data = bed_footer_block.getBlockData()
         bed_footer_block_data.setPart(Bed.Part.FOOT)
         bed_footer_block_data.setFacing(BlockFace.EAST)
         bed_footer_block.setBlockData(bed_footer_block_data)
-        
+
         bed_header_block = bed_footer_block.getRelative(BlockFace.EAST)
         bed_header_block.setType(bukkit.Material.RED_BED, False)
         bed_header_block_data = bed_footer_block.getBlockData()
         bed_header_block_data.setPart(Bed.Part.HEAD)
         bed_header_block_data.setFacing(BlockFace.EAST)
         bed_header_block.setBlockData(bed_header_block_data)
-        
-        return True        
+
+        return True
 
     @staticmethod
     def buildTorch(player, target_position):
