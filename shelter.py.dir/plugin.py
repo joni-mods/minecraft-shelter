@@ -22,12 +22,16 @@ class ShelterPlugin(PythonPlugin):
         # build door
         target_position.setX(target_position.getX() + 1)
         target_position.setY(target_position.getY() + 1)
-        ShelterPlugin.buildDoor(sender, target_position, bukkit.Material.DARK_OAK_DOOR,
-                                bukkit.Material.JUNGLE_DOOR)
+        ShelterPlugin.buildDoor(sender, target_position, bukkit.Material.DARK_OAK_DOOR, bukkit.Material.JUNGLE_DOOR)
 
         # build inner space
         target_position.setZ(target_position.getZ() + 1)
         ShelterPlugin.buildCube(sender, target_position, 2, 4, 4, bukkit.Material.AIR)
+
+        # build the torch
+        target_position.setZ(target_position.getZ() + 1)
+        target_position.setY(target_position.getY() + 1)
+        ShelterPlugin.buildTorch(sender, target_position)
 
         return True
 
@@ -70,5 +74,18 @@ class ShelterPlugin(PythonPlugin):
         door_upper_data.setHalf(Bisected.Half.TOP)
         door_upper_data.setFacing(BlockFace.SOUTH)
         door_upper.setBlockData(door_upper_data)
+
+        return True
+
+    @staticmethod
+    def buildTorch(player, target_position):
+        position = target_position.clone()
+        world = player.getWorld()
+
+        torch_block = world.getBlockAt(position)
+        torch_block.setType(bukkit.Material.WALL_TORCH, False)
+        torch_block_data = torch_block.getBlockData()
+        torch_block_data.setFacing(BlockFace.EAST)
+        torch_block.setBlockData(torch_block_data)
 
         return True
